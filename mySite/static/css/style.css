@@ -11,6 +11,18 @@ body {
     max-width: 900px;
     margin: auto;
     
+    header {
+        nav.navbar {
+            .container-fluid{
+                .navbar-brand:hover {
+                    transition-duration: 1s;
+                    color:rgb(2, 222, 178);
+                }
+
+            }
+
+        }
+    }
 
     main {
         .carousel {

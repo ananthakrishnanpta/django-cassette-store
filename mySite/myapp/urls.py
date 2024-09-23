@@ -4,7 +4,7 @@ from . import views  # importing the views.py from the same directory. Now all t
 
 
 urlpatterns = [
-    path('', views.home),
-    path('about', views.about)
+    path('', views.home, name="homepage"),
+    path('about', views.about, name="aboutpage")
 ]
 

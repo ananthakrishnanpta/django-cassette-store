@@ -3,6 +3,7 @@ from django.http import HttpResponse
 
 from django.template import loader # this module helps load html template
 
+from .models import Product
 # Create your views here.
 
 
@@ -10,8 +11,13 @@ from django.template import loader # this module helps load html template
 #     return HttpResponse("Hi, This is my home page !")
 
 def home(request):
+    products = Product.objects.all() # collecting all the products
+    context = {
+        'prods' : products,
+        
+    }
     template = loader.get_template('home.html')
-    return HttpResponse(template.render())
+    return HttpResponse(template.render(context, request))
 
 def about(request):
     # return HttpResponse("Hi, this is my about page !!!")
