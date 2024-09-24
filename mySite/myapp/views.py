@@ -24,3 +24,6 @@ def about(request):
     template = loader.get_template('about.html')
     return HttpResponse(template.render())
 
+def addProd(request):
+    template = loader.get_template('addProduct.html')
+    return HttpResponse(template.render())
