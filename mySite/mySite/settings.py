@@ -123,7 +123,7 @@ STATICFILES_DIRS = [
     ]
 
 
-# media files 
+# media files added on 24th September 2024
 
 MEDIA_ROOT = BASE_DIR/'media'
 MEDIA_URL = '/'

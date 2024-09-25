@@ -6,6 +6,7 @@ from . import views  # importing the views.py from the same directory. Now all t
 urlpatterns = [
     path('', views.home, name="homepage"),
     path('about', views.about, name="aboutpage"),
-    path('addProduct', views.addProd, name="addProduct")
+    path('addProduct', views.AddProduct.as_view(), name="addProduct"),
+    path('products', views.ProductList.as_view(), name="products")
 ]
 

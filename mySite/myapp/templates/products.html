@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+products
+{% endblock %}
+
+{% block content %}
+<section id="products">
+    <div>
+      <ul>
+        {% for p in product_list %}
+        <li>{{p.name}} -- Rs. {{p.price}}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  
+  </section>
+
+
+{% endblock %}
