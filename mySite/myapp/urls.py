@@ -9,4 +9,3 @@ urlpatterns = [
     path('addProduct', views.AddProduct.as_view(), name="addProduct"),
     path('products', views.ProductList.as_view(), name="products")
 ]
-

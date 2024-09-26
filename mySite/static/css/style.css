@@ -43,6 +43,78 @@ body {
                 }
             }
         }
+        div.prod-container {
+            /* background-color: aqua; */
+            /* flex properties */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            /* background-color: black; */
+            /* end of flex properties */
+
+            /*  styling for a product card */
+            div.card {
+                /* border: 1px solid; */
+                box-shadow: 1px 2px 4px 1px rgb(0, 0, 0);
+                border-radius: 6px;
+                background-color: rgb(255, 255, 255);
+                height: 310px;
+                width: 150px;
+                margin-top: 20px;
+                overflow: hidden;
+                transition-duration: 2s;
+                div.card-img {
+                    height: 50%;
+                    width: 100%;
+    
+                    img {
+                        height: 100%;
+                        width: 100%;
+                        object-fit: cover;
+                    }
+                }
+                div.card-text {
+                    text-align: center;
+                    /* background-color: aqua; */
+                    height: 50%;
+                    h3 {
+                        
+                        margin-top: 5px;
+                        height: 30px;
+                    }
+                    h5 {
+                        height: 20px;
+                    }
+                    p {
+                        height: 65px;
+                        padding: 4px;
+                        color: rgb(99, 99, 99);
+                    }
+                    button {
+                        height: 25px;
+                        width: 100px;
+                        padding: 2px;
+                        border-radius: 8px;
+                        border: 0px;
+                        cursor:cell;
+
+                        color: white;
+                        font-size: 14px;
+                        font-weight: 600;
+                        background-color: rgb(21, 155, 233);
+                    }
+                    button:hover {
+                        box-shadow: 1px 1px 1px 1px lightblue;
+                    }
+                }
+            }
+            div.card:hover {
+                background-color: rgb(255, 255, 255);
+                box-shadow: 1px 2px 4px 1px rgb(201, 201, 201);
+                transform: scale(1.05);
+                transition-duration: 1s;
+            }
+        }
     }
 
 

@@ -7,10 +7,32 @@ products
 
 {% block content %}
 <section id="products">
-    <div>
+  <div class="prod-container">
+    {% for p in product_list %}
+    <!-- Code for single card starts here -->
+    <div class="card">
+        <div class="card-img">
+            <img src="{{p.pic}}" alt="">
+        </div>
+        <div class="card-text">
+            <h3>{{p.name}}</h3>
+            <h5>Price : <ins>Rs. 150</ins></h5>
+            <p>
+          
+            </p>
+            <button>Add to Cart</button>
+        </div>
+    </div>
+    <!-- Code for a single card ends here -->
+    {% endfor %}
+  </div>
+
       <ul>
         {% for p in product_list %}
-        <li>{{p.name}} -- Rs. {{p.price}}</li>
+        <li>
+          {{p.name}} -- Rs. {{p.price}}  -- {{p.pic}}
+          <img src="{{p.pic}}" alt="unable to display">
+        </li>
         {% endfor %}
       </ul>
     </div>
