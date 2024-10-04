@@ -20,6 +20,15 @@ def home(request):
     template = loader.get_template('home.html')
     return HttpResponse(template.render(context, request))
 
+def product_details(request, id):
+    product = Product.objects.get(id = id)
+    context = {
+        'product' : product
+    }
+    template = loader.get_template('prod_details.html')
+    return HttpResponse(template.render(context, request))
+
+
 class ProductList(ListView):
     model  = Product
     template_name = 'products.html'

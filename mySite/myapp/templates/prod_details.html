@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+   {{ product.name }}
+{% endblock %}
+
+{% block content %}
+{{ product.id }} -- {{ product.name }}
+{% endblock %}
