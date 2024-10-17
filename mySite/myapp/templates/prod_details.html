@@ -6,5 +6,25 @@
 {% endblock %}
 
 {% block content %}
-{{ product.id }} -- {{ product.name }}
+
+<div class="prod-container">
+   <div class="row align-items-center">
+     <div class="col-6 prod-img">
+      <img src="{{product.pic.url}}" alt="">
+
+     </div>
+   <div class="col-6">
+      <div>
+         <h2>{{product.name}}</h2>
+         <p>Rs. {{product.price}}</p>
+      </div>
+      <div>
+         <p class="prod-description">
+            {{product.description}}
+         </p>
+      </div>
+   
+   </div>
+   </div>
+ </div>
 {% endblock %}

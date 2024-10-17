@@ -50,10 +50,11 @@ body {
             margin-top: 10px;
             display: grid;
             grid-template-columns: auto auto auto;
+            background-color: aliceblue;
             
             .card {
                 height: 350px;
-                width: 150px;
+                width: 200px;
                 
                 img {
                     height: 50%;
@@ -68,6 +69,19 @@ body {
                 }
             }
         }
+        .prod-container {
+            .row {
+                display: flex;
+                .col-6 {
+                    img {
+                        width: 100%;
+                        aspect-ratio: 1/1;
+                        object-fit: cover;
+                    }
+                }
+            }
+        }
+        
         
     }
 

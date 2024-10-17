@@ -10,12 +10,13 @@ products
   <div class="container">
     {% for p in product_list %}
     <!-- Code for single card starts here -->
-    <div class="card" style="width: 18rem;">
-      <img src="{{p.pic}}" class="card-img-top" alt="...">
+    <div class="card" >
+      <img src="{{p.pic.url}}" class="card-img-top" alt="...">
       <div class="card-body">
         <a href="{% url 'p_details' p.pk %}">
           <h5 class="card-title">{{p.name}}</h5>
         </a>
+        <p>Rs.{{p.price}}</p>
        
         <a href="#" class="btn btn-primary">Add To Cart</a>
       </div>
