@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Add Product 
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        
+        <form method="post" enctype="multipart/form-data" class="form-control">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Edit Product</button>
+        </form>
+    </div>
+{% endblock %}

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from django.template import loader # this module helps load html template
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from .models import Product
 # from .forms import AddProductForm
 # Create your views here.
@@ -50,4 +50,17 @@ class AddProduct(CreateView):
             'pic'        
             ]
 
+    success_url = "/"
+
+
+class EditProduct(UpdateView):
+    model = Product
+    template_name = "EditProduct.html"
+    fields = [
+            'name',
+            'price',
+            'description',
+            'stock',
+            'pic'        
+            ]
     success_url = "/"
