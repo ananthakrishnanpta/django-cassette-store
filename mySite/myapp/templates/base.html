@@ -34,7 +34,7 @@
                   <li class="nav-item">
                     <a class="nav-link" href="{% url 'products' %}">Products</a>
                   </li>
-                  <li class="nav-item dropdown">
+                  <!-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Dropdown
                     </a>
@@ -44,13 +44,33 @@
                       <li><hr class="dropdown-divider"></li>
                       <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
+                  </li> -->
+
+                  {% if user.is_authenticated %}
+                  <li class="nav-item">
+                    <form action="{% url 'logout' %}" method="post">
+                      {% csrf_token %}
+                      <button type="submit">Logout</button>
+                    </form>
                   </li>
+
                   <li class="nav-item">
                     <a class="nav-link" href="{% url 'addProduct' %}">Add Product</a>
                   </li>
+
+                  {% else %}
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'register' %}">Register</a>
+                  </li>
+                  {% endif %}
+
+
                 </ul>
-                <form class="d-flex" role="search">
-                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <form class="d-flex" role="search" action="https://www.google.com/search?">
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q">
                   <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
               </div>
