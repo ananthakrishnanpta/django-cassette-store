@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Search results for > {{ query }}
+{% endblock %}
+
+{% block search-value %}
+  {{query}}
+{% endblock %}
+
+{% block content %}
+
+{% if items == 0 %}
+<h2>
+  <p class="query">{{ query }}</p> not found !!!
+</h2>
+{% else %}
+<h2>
+  Search results for  <p class="query">{{ query }}</p>
+  <p>{{items}} results.</p>
+</h2>
+
+
+<section id="products">
+  <div class="container">
+    {% for p in prods %}
+    <!-- Code for single card starts here -->
+    <div class="card" >
+      <img src="{{p.pic.url}}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <a href="{% url 'p_details' p.pk %}">
+          <h5 class="card-title">{{p.name}}</h5>
+        </a>
+        <p>Rs.{{p.price}}</p>
+        <a href="#" class="btn btn-primary">Add To Cart</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% endblock %}

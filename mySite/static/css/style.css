@@ -7,10 +7,16 @@ html {
     background-color: black;
 }
 
+
 body {
     max-width: 900px;
     margin: auto;
     
+    .query {
+        color:rgb(113, 113, 192);
+        text-decoration: underline;
+        display: inline;
+    }
     header {
         nav.navbar {
             .container-fluid{

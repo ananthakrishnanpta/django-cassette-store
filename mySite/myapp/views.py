@@ -64,3 +64,44 @@ class EditProduct(UpdateView):
             'pic'        
             ]
     success_url = "/"
+
+
+
+def searchView(request):
+    query = request.GET.get('q1')
+    results = Product.objects.filter(name__icontains=query) # filtering the product objects according string matching query
+    # In the SQL => select * from Products where name like '%query%';
+    context = {
+        'prods' : results,
+        'query' : query,
+        'owner' :"surya",
+        "items" : len(results)
+    }
+    
+    template = loader.get_template('search_results.html')
+    return HttpResponse(template.render(context, request))
+
+class ProductSearchView(ListView):
+    model = Product
+    template_name = 'search_results.html'
+    context_object_name = 'prods'
+
+    # by default, this method of ListView collects all objects of the given class name
+    # we are overriding and altering the method to collect only the objects with name containing the search string
+    def get_queryset(self):
+        query = self.request.GET.get('q1')
+        if query:
+            return Product.objects.filter(name__icontains=query)
+        # This will 
+        return Product.objects.all()
+    
+    # overrides the method which provides the context data, 
+    # adds more key-value pairs to the dict and returns it
+    # this will alter the context data before sending for rendering with template
+
+    def get_context_data(self, **kwargs):
+        default_context =  super().get_context_data(**kwargs) 
+        # getting the default context variables using superclass method
+        query = self.request.GET.get('q1','')
+        default_context['query'] = query
+        return default_context
