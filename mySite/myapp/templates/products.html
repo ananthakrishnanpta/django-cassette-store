@@ -17,8 +17,8 @@ products
           <h5 class="card-title">{{p.name}}</h5>
         </a>
         <p>Rs.{{p.price}}</p>
-        <a href="#" class="btn btn-primary">Add To Cart</a>
-      </div>
+        <a href="{% url 'cart:add_to_cart' p.id %}" class="btn btn-primary">Add To Cart</a>
+        </div>
     </div>
     {% endfor %}
   </div>

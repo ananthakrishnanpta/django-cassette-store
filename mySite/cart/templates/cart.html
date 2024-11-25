@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+   {{user.username}}'s cart
+{% endblock %}
+
+{% block content %}
+
+{% if cart_items %}
+<ul>
+    {% for item in cart_items %}
+        <li id="cart-item-{{ item.id }}">
+            <strong>{{ item.product.name }}</strong> - Rs. {{ item.product.price }}
+            <button onclick="updateCart('{% url 'cart:remove_quantity' item.id %}', {{ item.id }}, false, '{{ csrf_token }}')">-</button>
+            <span id="quantity-{{ item.id }}">{{ item.quantity }}</span>
+            <button onclick="updateCart('{% url 'cart:add_quantity' item.id %}', {{ item.id }}, true, '{{ csrf_token }}')">+</button>
+            = Rs. <span id="total-price-{{ item.id }}">{{ item.get_total_price }}</span>
+        </li>
+    {% endfor %}
+</ul>
+<p><strong>Total: Rs.<span id="overall-total">{{ total_price }}</span></strong></p>
+{% else %}
+<p>Your cart is empty.</p>
+{% endif %}
+
+{% endblock %}

@@ -17,6 +17,7 @@
 
     <!-- linking the static css files -->
      <link rel="stylesheet" href="{% static 'css/style.css' %}">
+     <script src="{% static 'js/scripts.js' %}"></script>
 </head>
 <body>
     <header>
@@ -51,7 +52,7 @@
                   <li class="nav-item">
                     <form action="{% url 'logout' %}" method="post">
                       {% csrf_token %}
-                      <button type="submit">Logout</button>
+                      <button class="nav-link" type="submit">Logout</button>
                     </form>
                   </li>
                     {% if user.is_staff %}
@@ -60,7 +61,7 @@
                       </li>
                       {% else %}
                       <li class="nav-item">
-                        <a class="nav-link" href="">My Cart</a>
+                        <a class="nav-link" href="{% url 'cart:view_cart' %}">My Cart</a>
                       </li>
                     {% endif %}
                   {% else %}
