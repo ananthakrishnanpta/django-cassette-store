@@ -12,10 +12,14 @@
     {% for item in cart_items %}
         <li id="cart-item-{{ item.id }}">
             <strong>{{ item.product.name }}</strong> - Rs. {{ item.product.price }}
+
             <button onclick="updateCart('{% url 'cart:remove_quantity' item.id %}', {{ item.id }}, false, '{{ csrf_token }}')">-</button>
             <span id="quantity-{{ item.id }}">{{ item.quantity }}</span>
             <button onclick="updateCart('{% url 'cart:add_quantity' item.id %}', {{ item.id }}, true, '{{ csrf_token }}')">+</button>
-            = Rs. <span id="total-price-{{ item.id }}">{{ item.get_total_price }}</span>
+            = Rs. 
+            <span id="total-price-{{ item.id }}">{{ item.get_total_price }}</span>
+            <a href="{% url 'cart:remove_from_cart' item.id %}">remove</a>
+
         </li>
     {% endfor %}
 </ul>
