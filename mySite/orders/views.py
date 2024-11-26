@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Order, OrderDetails
 from cart.models import CartItem
 # Create your views here.
