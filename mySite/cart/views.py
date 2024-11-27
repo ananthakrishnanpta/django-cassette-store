@@ -29,6 +29,7 @@ def addToCart(request, product_id):
     # insert into CartItem(product, user) values(this_product, request.user) on duplicate key update quantity = quantity + 1
     return redirect('cart:view_cart')
 
+@login_required
 def remove_from_cart(request, cart_item_id):
     cart_item = CartItem.objects.get(id = cart_item_id) 
     # filter and get the particular cart item object filtered pk
