@@ -20,6 +20,7 @@ def viewCart(request):
     }
     return render(request, template, context)
 
+@login_required
 def addToCart(request, product_id):
     this_product = Product.objects.get(id = product_id)
     cart_item, created = CartItem.objects.get_or_create(product=this_product, user=request.user)
