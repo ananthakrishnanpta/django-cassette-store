@@ -26,11 +26,13 @@ def create_razorpay_order(request, order_id):
     order.razorpay_order_id = razorpay_order['id']
     order.save()
 
-    return render(request, "checkout.html", {
+    context = {
         "razorpay_order": razorpay_order,
         "order": order,
         "key_id": settings.RAZORPAY_KEY_ID
-    })
+    }
+
+    return render(request, "checkout.html", context )
 
 @csrf_exempt
 def payment_success(request):
