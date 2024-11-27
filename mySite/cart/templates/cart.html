@@ -28,4 +28,12 @@
 <p>Your cart is empty.</p>
 {% endif %}
 
+<!-- Show place your order button only if cart_items exists -->
+{% if cart_items %}
+    <form method="post" action="{% url 'orders:create_order' %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-primary">Place Order</button>
+    </form>
+{% endif %}
+
 {% endblock %}

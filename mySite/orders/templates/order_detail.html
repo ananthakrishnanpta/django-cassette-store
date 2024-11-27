@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+   <!-- Fill title here -->
+    My Orders
+{% endblock %}
+
+{% block content %}
+<!-- Fill content -->
+ 
+<h1>Order #{{ order.id }} Details</h1>
+<p>Order Date: {{ order.order_date }}</p>
+<p>Status: {{ order.status }}</p>
+<p>Total Amount: ₹{{ order.total_amount }}</p>
+
+<h2>Products</h2>
+<ul>
+    {% for detail in order.order_details.all %}
+        <li>
+            {{ detail.cart_item.product.name }} - Quantity: {{ detail.quantity }} - Price: ₹{{ detail.price }}
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
