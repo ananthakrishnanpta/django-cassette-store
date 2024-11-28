@@ -39,33 +39,63 @@
         .checkout-card .order-details {
             margin-bottom: 20px;
         }
+        .address-option {
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
     <div class="container my-5">
         <div class="checkout-card">
             <h1 class="text-center">Checkout</h1>
-            Dear {{ user.username }}, Please make the payment ...
-            <div class="order-details">
-                <!-- <p><strong>Order ID:</strong> {{ razorpay_order.id }}</p> -->
+            <p class="text-center">Dear {{ user.username }}, Please make the payment for your order.</p>
+            <div class="order-details text-center">
                 <p><strong>Total Amount:</strong> ₹{{ order.total_amount }}</p>
             </div>
 
-            <form id="payment-form" method="post" action="{% url 'payment:payment_success' %}" class="text-center">
-                <script src="https://checkout.razorpay.com/v1/checkout.js"
-                        data-key="{{ key_id }}"
-                        data-amount="{{ razorpay_order.amount }}"
-                        data-currency="{{ razorpay_order.currency }}"
-                        data-order_id="{{ razorpay_order.id }}"
-                        data-buttontext="Pay Now"
-                        data-name="My Shopping Site"
-                        data-description="Test transaction"
-                        data-theme.color="#F37254">
-                </script>
-
-                <input type="hidden" name="razorpay_order_id" value="{{ razorpay_order.id }}">
-                <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+            <h4>Select Address</h4>
+            <form method="post" class="mb-4">
+                {% csrf_token %}
+                
+                <!-- If addresses are available, allow user to select one -->
+                {% if addresses %}
+                    {% for address in addresses %}
+                        <div class="form-check address-option">
+                            <input class="form-check-input" type="radio" name="address_id" value="{{ address.id }}" id="address{{ address.id }}" {% if order.address.id == address.id %}checked{% endif %}>
+                            <label class="form-check-label" for="address{{ address.id }}">
+                                {{ address.address_line1 }}, {{ address.city }}, {{ address.state }} - {{ address.zip_code }}
+                            </label>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>No addresses found. Please add an address below.</p>
+                {% endif %}
+                
+                <h4>Or Add a New Address</h4>
+                <div class="mb-3">
+                    {{ address_form.as_p }}
+                </div>
+                <button type="submit" class="btn btn-primary w-100" name="add_address">Add Address</button>
+                <button type="submit" class="btn btn-success w-100 mt-3" name="select_address">Select Address and Proceed</button>
             </form>
+
+            <div class="text-center">
+                <form id="payment-form" method="post" action="{% url 'payment:payment_success' %}">
+                    <script src="https://checkout.razorpay.com/v1/checkout.js"
+                            data-key="{{ key_id }}"
+                            data-amount="{{ razorpay_order.amount }}"
+                            data-currency="{{ razorpay_order.currency }}"
+                            data-order_id="{{ razorpay_order.id }}"
+                            data-buttontext="Pay Now"
+                            data-name="My Shopping Site"
+                            data-description="Test transaction"
+                            data-theme.color="#F37254">
+                    </script>
+
+                    <input type="hidden" name="razorpay_order_id" value="{{ razorpay_order.id }}">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                </form>
+            </div>
         </div>
     </div>
 

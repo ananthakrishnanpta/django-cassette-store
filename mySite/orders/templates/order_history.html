@@ -17,10 +17,22 @@
             <p><strong>Total Amount:</strong> ₹{{ order.total_amount }}</p>
             <p><strong>Razorpay Order ID:</strong> {{ order.razorpay_order_id }}</p>
 
+            <!-- Displaying Address -->
+            <h4>Shipping Address:</h4>
+            {% if order.address %}
+                <p><strong>Address Line 1:</strong> {{ order.address.address_line1 }}</p>
+                <p><strong>Address Line 2:</strong> {{ order.address.address_line2 }}</p>
+                <p><strong>City:</strong> {{ order.address.city }}</p>
+                <p><strong>State:</strong> {{ order.address.state }}</p>
+                <p><strong>ZIP Code:</strong> {{ order.address.zip_code }}</p>
+                <p><strong>Country:</strong> {{ order.address.country }}</p>
+            {% else %}
+                <p>No shipping address available.</p>
+            {% endif %}
+
             <h4>Order Details:</h4>
             <ul>
                 {% for item in order.order_details.all %}
-                <!-- datatype of item here is OrderDetails -->
                     <li>
                         <strong>Product:</strong> {{ item.order_item.name }} - 
                         <strong>Quantity:</strong> {{ item.quantity }} - 
@@ -34,4 +46,3 @@
     <p>No orders found!</p>
 {% endif %}
 {% endblock %}
-

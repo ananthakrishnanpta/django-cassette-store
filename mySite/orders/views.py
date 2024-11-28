@@ -2,7 +2,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.utils.timezone import now
 from cart.models import CartItem
-from .models import Order, OrderDetails
+from .models import Order, OrderDetails, Address
+from .forms import AddressForm
+
 
 @login_required
 def create_order(request):
@@ -44,7 +46,7 @@ def create_order(request):
 def order_history(request):
     if not request.user.is_authenticated:
         return redirect('login')
-    orders = Order.objects.filter(user=request.user).prefetch_related('order_details')
+    orders = Order.objects.filter(user=request.user).prefetch_related('order_details').order_by('-order_date')
 
     context =  {
         'orders': orders
@@ -58,3 +60,34 @@ def order_detail(request, order_id):
     user = request.user
     order = get_object_or_404(Order, id=order_id, user=user)
     return render(request, 'order_detail.html', {'order': order})
+
+
+
+@login_required
+def add_address(request):
+    form = AddressForm()
+    if request.method == 'POST':
+        form = AddressForm(request.POST)
+        if form.is_valid():
+            address = form.save(commit=False)
+            address.user = request.user
+            address.save()
+            return redirect('profile')  # Redirect to profile or a page listing addresses
+    return render(request, 'add_address.html', {'form': form})
+
+
+@login_required
+def select_address_for_order(request, order_id):
+    order = get_object_or_404(Order, id=order_id, user=request.user)
+    addresses = request.user.addresses.all()
+
+    if request.method == 'POST':
+        address_id = request.POST.get('address')
+        address = get_object_or_404(Address, id=address_id, user=request.user)
+        order.address = address
+        order.save()
+        return redirect('order_history')  # Redirect to order history or order details page
+
+    return render(request, 'select_address.html', {'order': order, 'addresses': addresses})
+
+

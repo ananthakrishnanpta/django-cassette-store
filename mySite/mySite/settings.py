@@ -147,3 +147,13 @@ LOGOUT_REDIRECT_URL = 'homepage'
 
 RAZORPAY_KEY_ID = "rzp_test_9P9O3QEVgL1NOJ"  # Replace with your Key ID
 RAZORPAY_KEY_SECRET = "xFG0Iltj7NWeH80gYmLvwTEg"
+
+
+# settings.py
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Use your email provider's SMTP host
+EMAIL_PORT = 25  # Typically 587 for TLS, or 465 for SSL
+EMAIL_USE_TLS = True  # For security (use SSL if using 465 port)
+EMAIL_HOST_USER = 'krishnaemailtest@gmail.com'  # Your email address
+EMAIL_HOST_PASSWORD = 'testemail@123'  # Your email password (use App password if 2FA enabled)

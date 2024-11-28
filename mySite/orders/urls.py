@@ -12,4 +12,6 @@ urlpatterns = [
     
     # Route to view details of a specific order
     path('order_detail/<int:order_id>/', views.order_detail, name='order_detail'),
+    path('add-address/', views.add_address, name='add_address'),
+    path('select-address/<int:order_id>/', views.select_address_for_order, name='select_address'),
 ]
