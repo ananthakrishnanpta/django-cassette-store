@@ -29,7 +29,7 @@ def create_order(request):
     for item in cart_items:
         OrderDetails.objects.create(
             order=order,
-            cart_item=item,
+            order_item=item.product,
             quantity=item.quantity,
             price=item.product.price * item.quantity
         )
@@ -41,12 +41,15 @@ def create_order(request):
     return redirect('payment:create_razorpay_order', order_id=order.id)
 
 
-@login_required
 def order_history(request):
-    """Display a list of all orders for the logged-in user."""
-    user = request.user
-    orders = Order.objects.filter(user=user).order_by('-order_date')
-    return render(request, 'order_history.html', {'orders': orders})
+    if not request.user.is_authenticated:
+        return redirect('login')
+    orders = Order.objects.filter(user=request.user).prefetch_related('order_details')
+
+    context =  {
+        'orders': orders
+        }
+    return render(request, 'order_history.html', context)
 
 
 @login_required

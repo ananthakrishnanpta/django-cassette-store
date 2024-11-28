@@ -2,22 +2,36 @@
 {% load static %}
 
 {% block title %}
-   <!-- Fill title here -->
     My Orders
 {% endblock %}
 
 {% block content %}
-<!-- Fill content -->
-<h1>Your Order History</h1>
-<ul>
+<h1>My Orders</h1>
+
+{% if orders %}
     {% for order in orders %}
-        <li>
-            Order #{{ order.id }} - Total: ₹{{ order.total_amount }} - Status: {{ order.status }}
-            <a href="{% url 'orders:order_detail' order.id %}">View Details</a>
-        </li>
+        <div class="order-card mb-4 border p-3">
+            <h3>Order #{{ order.id }}</h3>
+            <p><strong>Date Placed:</strong> {{ order.order_date }}</p>
+            <p><strong>Status:</strong> {{ order.status }}</p>
+            <p><strong>Total Amount:</strong> ₹{{ order.total_amount }}</p>
+            <p><strong>Razorpay Order ID:</strong> {{ order.razorpay_order_id }}</p>
+
+            <h4>Order Details:</h4>
+            <ul>
+                {% for item in order.order_details.all %}
+                <!-- datatype of item here is OrderDetails -->
+                    <li>
+                        <strong>Product:</strong> {{ item.order_item.name }} - 
+                        <strong>Quantity:</strong> {{ item.quantity }} - 
+                        <strong>Price:</strong> ₹{{ item.price }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
     {% endfor %}
-</ul>
-
-
-
+{% else %}
+    <p>No orders found!</p>
+{% endif %}
 {% endblock %}
+

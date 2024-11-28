@@ -35,9 +35,10 @@ class ProductList(ListView):
 
 
 def about(request):
-    # return HttpResponse("Hi, this is my about page !!!")
+    context = {   
+    }
     template = loader.get_template('about.html')
-    return HttpResponse(template.render())
+    return HttpResponse(template.render(context, request))
 
 class AddProduct(CreateView):
     model = Product
