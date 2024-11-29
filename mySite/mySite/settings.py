@@ -145,8 +145,8 @@ LOGIN_REDIRECT_URL = 'homepage'
 LOGOUT_REDIRECT_URL = 'homepage'
 
 
-RAZORPAY_KEY_ID = "rzp_test_9P9O3QEVgL1NOJ"  # Replace with your Key ID
-RAZORPAY_KEY_SECRET = "xFG0Iltj7NWeH80gYmLvwTEg"
+RAZORPAY_KEY_ID = "rzp_test_IvhcHeoNovUUfT"  # Replace with your Key ID
+RAZORPAY_KEY_SECRET = "6gzyH5ZmRLlgSFOzWjzrUgd7"
 
 
 # settings.py
