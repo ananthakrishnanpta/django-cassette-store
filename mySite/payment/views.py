@@ -53,6 +53,7 @@ def create_razorpay_order(request, order_id):
         razorpay_order = client.order.create(data=razorpay_order_data)
         order.razorpay_order_id = razorpay_order["id"]
         order.save()
+        print("this>>>",order.razorpay_order_id)
 
         context = {
             "razorpay_order": razorpay_order,
